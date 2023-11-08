@@ -153,7 +153,7 @@ namespace FractalRenderer
                     ToCheck.Add((ToCheck[0].Item1 + 1, new Vector4(EndX, EndY, ToCheck[0].Item2.Z * DistanceChange, NewAngle)));
                 }
                 DrawLine(new Vector2(ToCheck[0].Item2.X, ToCheck[0].Item2.Y), ToCheck[0].Item2.Z, ToCheck[0].Item2.W, Color.Black);
-                _spriteBatch.Draw(Color_White, new Rectangle((int)ToCheck[0].Item2.X, (int)ToCheck[0].Item2.Y, 4, 4), Color.Black);
+                _spriteBatch.Draw(Color_White, new Rectangle((int)ToCheck[0].Item2.X - 2, (int)ToCheck[0].Item2.Y - 2, 4, 4), Color.Black);
 
                 //ToCheck.RemoveAt(0);
                 ToCheck.Remove(ToCheck[0]);
