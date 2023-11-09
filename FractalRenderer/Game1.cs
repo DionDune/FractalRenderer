@@ -61,14 +61,25 @@ namespace FractalRenderer
             List<Keys> Keys_NewlyPressed = Keyboard.GetState().GetPressedKeys().ToList();
 
 
+            bool Shifting = Keys_NewlyPressed.Contains(Keys.LeftShift);
+
+
             //Rotate Fractal
             if (Keys_NewlyPressed.Contains(Keys.Right))
             {
                 RotationChange += 0.002F;
+                if (Shifting)
+                {
+                    RotationChange += 0.002F;
+                }
             }
             else if (Keys_NewlyPressed.Contains(Keys.Left))
             {
                 RotationChange -= 0.002F;
+                if (Shifting)
+                {
+                    RotationChange -= 0.002F;
+                }
             }
             if (RotationChange < 0)
             {
@@ -83,22 +94,39 @@ namespace FractalRenderer
             if (Keys_NewlyPressed.Contains(Keys.Up))
             {
                 DistanceChange += 0.001F;
+                if (Shifting)
+                {
+                    DistanceChange += 0.001F;
+                }
             }
             else if (Keys_NewlyPressed.Contains(Keys.Down))
             {
                 DistanceChange -= 0.001F;
+                if (Shifting)
+                {
+                    DistanceChange -= 0.001F;
+                }
             }
 
-            //Change Length of Intitial Branches
+            //Change Length of Intitial Branches, Acts as ZOOM feature
             if (Keys_NewlyPressed.Contains(Keys.OemMinus))
             {
                 InitialDistance++;
+                if (Shifting)
+                {
+                    InitialDistance++;
+                }
                 InitialDistance = Math.Abs(InitialDistance);
             }
             else if (Keys_NewlyPressed.Contains(Keys.OemPlus))
             {
                 InitialDistance--;
+                if (Shifting)
+                {
+                    InitialDistance--;
+                }
             }
+
 
             //Change Number of Brances
             if (Keys_NewlyPressed.Contains(Keys.PageUp) && !Keys_BeingPressed.Contains(Keys.PageUp))
