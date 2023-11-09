@@ -61,7 +61,7 @@ namespace FractalRenderer
             List<Keys> Keys_NewlyPressed = Keyboard.GetState().GetPressedKeys().ToList();
 
 
-
+            //Rotate Fractal
             if (Keys_NewlyPressed.Contains(Keys.Right))
             {
                 RotationChange += 0.002F;
@@ -79,6 +79,7 @@ namespace FractalRenderer
                 RotationChange -= 360;
             }
 
+            //Change Distance Multiplier
             if (Keys_NewlyPressed.Contains(Keys.Up))
             {
                 DistanceChange += 0.001F;
@@ -88,6 +89,18 @@ namespace FractalRenderer
                 DistanceChange -= 0.001F;
             }
 
+            //Change Length of Intitial Branches
+            if (Keys_NewlyPressed.Contains(Keys.OemMinus))
+            {
+                InitialDistance++;
+                InitialDistance = Math.Abs(InitialDistance);
+            }
+            else if (Keys_NewlyPressed.Contains(Keys.OemPlus))
+            {
+                InitialDistance--;
+            }
+
+            //Change Number of Brances
             if (Keys_NewlyPressed.Contains(Keys.PageUp) && !Keys_BeingPressed.Contains(Keys.PageUp))
             {
                 BranchSteps++;
