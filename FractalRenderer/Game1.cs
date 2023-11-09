@@ -113,19 +113,19 @@ namespace FractalRenderer
             //Change Length of Intitial Branches, Acts as ZOOM feature
             if (Keys_NewlyPressed.Contains(Keys.OemMinus))
             {
-                InitialDistance++;
+                InitialDistance--;
                 if (Shifting)
                 {
-                    InitialDistance++;
+                    InitialDistance--;
                 }
                 InitialDistance = Math.Abs(InitialDistance);
             }
             else if (Keys_NewlyPressed.Contains(Keys.OemPlus))
             {
-                InitialDistance--;
+                InitialDistance++;
                 if (Shifting)
                 {
-                    InitialDistance--;
+                    InitialDistance++;
                 }
             }
 
