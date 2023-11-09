@@ -115,6 +115,14 @@ namespace FractalRenderer
 
 
 
+            //Toggle Fullscreen
+            if (Keys_NewlyPressed.Contains(Keys.F) && !Keys_BeingPressed.Contains(Keys.F))
+            {
+                _graphics.ToggleFullScreen();
+            }
+
+
+
             Keys_BeingPressed = Keys_NewlyPressed;
         }
 
