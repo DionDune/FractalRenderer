@@ -129,7 +129,6 @@ namespace FractalRenderer
                 }
             }
 
-
             //Change Number of Brances
             if (Keys_NewlyPressed.Contains(Keys.PageUp) && !Keys_BeingPressed.Contains(Keys.PageUp))
             {
@@ -143,6 +142,40 @@ namespace FractalRenderer
                 }
             }
 
+
+            //Move Fractal
+            if (Keys_NewlyPressed.Contains(Keys.D))
+            {
+                InitialPosition.X--;
+                if (Shifting)
+                {
+                    InitialPosition.X--;
+                }
+            }
+            else if (Keys_NewlyPressed.Contains(Keys.A))
+            {
+                InitialPosition.X++;
+                if (Shifting)
+                {
+                    InitialPosition.X++;
+                }
+            }
+            if (Keys_NewlyPressed.Contains(Keys.W))
+            {
+                InitialPosition.Y++;
+                if (Shifting)
+                {
+                    InitialPosition.Y++;
+                }
+            }
+            else if (Keys_NewlyPressed.Contains(Keys.S))
+            {
+                InitialPosition.Y--;
+                if (Shifting)
+                {
+                    InitialPosition.Y--;
+                }
+            }
 
 
             //Toggle Fullscreen
