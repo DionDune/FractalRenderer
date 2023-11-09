@@ -16,6 +16,7 @@ namespace FractalRenderer
 
         Texture2D Color_White;
 
+        float InitialDistance;
         float RotationChange;
         float DistanceChange;
         int BranchSteps;
@@ -40,6 +41,7 @@ namespace FractalRenderer
             RotationChange = 25F;
             DistanceChange = 0.9F;
             BranchSteps = 10;
+            InitialDistance = 100;
             
             base.Initialize();
         }
@@ -129,7 +131,7 @@ namespace FractalRenderer
 
             _spriteBatch.Begin();
 
-            Vector4 Start = new Vector4(900,900,100, 4.7123889804F);
+            Vector4 Start = new Vector4(900,900,InitialDistance, 4.7123889804F);
             (int, Vector4) StartBranch = (0, Start);
 
 
