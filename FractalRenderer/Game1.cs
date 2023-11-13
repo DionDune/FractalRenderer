@@ -241,7 +241,6 @@ namespace FractalRenderer
 
 
                 DrawLine(new Vector2(ToCheck[0].Item2.X, ToCheck[0].Item2.Y), ToCheck[0].Item2.Z, ToCheck[0].Item2.W, Color.White);
-                //_spriteBatch.Draw(Color_White, new Rectangle((int)ToCheck[0].Item2.X - 2, (int)ToCheck[0].Item2.Y - 2, 4, 4), Color.Black);
 
                 ToCheck.RemoveAt(0);
             }
