@@ -193,7 +193,7 @@ namespace FractalRenderer
 
         #region Fundamentals
 
-        void DrawLine(Vector2 point, float Length, float Angle, Color Color, float Thickness = 0.95F)
+        void DrawLine(Vector2 point, float Length, float Angle, Color Color, float Thickness = 1)
         {
             var origin = new Vector2(0f, 0.5f);
             var scale = new Vector2(Length, Thickness);
