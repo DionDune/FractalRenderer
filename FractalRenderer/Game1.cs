@@ -178,6 +178,13 @@ namespace FractalRenderer
             }
 
 
+            //Invert Distance Multiplyer
+            if (Keys_NewlyPressed.Contains(Keys.I) && !Keys_BeingPressed.Contains(Keys.I))
+            {
+                DistanceChange = -DistanceChange;
+            }
+
+
             //Toggle Fullscreen
             if (Keys_NewlyPressed.Contains(Keys.F) && !Keys_BeingPressed.Contains(Keys.F))
             {
@@ -193,7 +200,7 @@ namespace FractalRenderer
 
         #region Fundamentals
 
-        void DrawLine(Vector2 point, float Length, float Angle, Color Color, float Thickness = 1)
+        void DrawLine(Vector2 point, float Length, float Angle, Color Color, float Thickness = 1.5F)
         {
             var origin = new Vector2(0f, 0.5f);
             var scale = new Vector2(Length, Thickness);
@@ -204,6 +211,8 @@ namespace FractalRenderer
         protected override void Update(GameTime gameTime)
         {
             KeyboardHandler();
+
+            Debug.WriteLine(InitialDistance);
 
 
             base.Update(gameTime);
