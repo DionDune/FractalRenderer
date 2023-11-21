@@ -191,11 +191,12 @@ namespace FractalRenderer
                 }
             }
 
-
+            
             //Invert Distance Multiplyer
             if (Keys_NewlyPressed.Contains(Keys.I) && !Keys_BeingPressed.Contains(Keys.I))
             {
                 DistanceChange = -DistanceChange;
+                RotationChange -= 180;
             }
             //Toggle Random Colour
             if (Keys_NewlyPressed.Contains(Keys.C) && !Keys_BeingPressed.Contains(Keys.C))
