@@ -197,6 +197,11 @@ namespace FractalRenderer
             {
                 DistanceChange = -DistanceChange;
             }
+            //Toggle Random Colour
+            if (Keys_NewlyPressed.Contains(Keys.C) && !Keys_BeingPressed.Contains(Keys.C))
+            {
+                randomColors = !randomColors;
+            }
 
 
             //Toggle Fullscreen
