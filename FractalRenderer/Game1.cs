@@ -11,6 +11,8 @@ namespace FractalRenderer
 {
     public class Game1 : Game
     {
+        #region Variable Defenition
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -23,6 +25,8 @@ namespace FractalRenderer
         int BranchSteps;
 
         List<Keys> Keys_BeingPressed = new List<Keys>();
+
+        #endregion
 
         #region Initialize
 
@@ -58,6 +62,7 @@ namespace FractalRenderer
         #endregion
 
         /////////////////////////////////////////
+        
         void KeyboardHandler()
         {
             List<Keys> Keys_NewlyPressed = Keyboard.GetState().GetPressedKeys().ToList();
@@ -200,7 +205,7 @@ namespace FractalRenderer
 
         #region Fundamentals
 
-        void DrawLine(Vector2 point, float Length, float Angle, Color Color, float Thickness = 1.5F)
+        void DrawLine(Vector2 point, float Length, float Angle, Color Color, float Thickness = 1F)
         {
             var origin = new Vector2(0f, 0.5f);
             var scale = new Vector2(Length, Thickness);
@@ -247,7 +252,6 @@ namespace FractalRenderer
 
                     ToCheck.Add((ToCheck[0].Item1 + 1, new Vector4(EndX, EndY, ToCheck[0].Item2.Z * DistanceChange, NewAngle)));
                 }
-
 
                 DrawLine(new Vector2(ToCheck[0].Item2.X, ToCheck[0].Item2.Y), ToCheck[0].Item2.Z, ToCheck[0].Item2.W, Color.White);
 
