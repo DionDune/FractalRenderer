@@ -231,7 +231,6 @@ namespace FractalRenderer
         {
             KeyboardHandler();
 
-            Debug.WriteLine(InitialDistance);
 
 
             base.Update(gameTime);
