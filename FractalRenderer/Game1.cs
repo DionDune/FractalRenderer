@@ -11,10 +11,16 @@ namespace FractalRenderer
 {
     public class Game1 : Game
     {
+        #region Variable Defenition
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        Random random;
+
         Texture2D Color_White;
+        List<Color> Colors = new List<Color>();
+        bool randomColors;
 
         Vector2 InitialPosition;
         float InitialDistance;
@@ -23,6 +29,8 @@ namespace FractalRenderer
         int BranchSteps;
 
         List<Keys> Keys_BeingPressed = new List<Keys>();
+
+        #endregion
 
         #region Initialize
 
@@ -39,11 +47,16 @@ namespace FractalRenderer
 
         protected override void Initialize()
         {
+            random = new Random();
+
             InitialPosition = new Vector2(900, 900);
             RotationChange = 25F;
             DistanceChange = 0.9F;
             BranchSteps = 10;
             InitialDistance = 100;
+
+            Colors = new List<Color>() { Color.Red, Color.Green, Color.Yellow, Color.HotPink, Color.Blue, Color.Purple };
+            randomColors = true;
             
             base.Initialize();
         }
@@ -60,6 +73,7 @@ namespace FractalRenderer
         #endregion
 
         /////////////////////////////////////////
+        
         void KeyboardHandler()
         {
             List<Keys> Keys_NewlyPressed = Keyboard.GetState().GetPressedKeys().ToList();
@@ -179,11 +193,17 @@ namespace FractalRenderer
                 }
             }
 
-
+            
             //Invert Distance Multiplyer
             if (Keys_NewlyPressed.Contains(Keys.I) && !Keys_BeingPressed.Contains(Keys.I))
             {
                 DistanceChange = -DistanceChange;
+                RotationChange -= 180;
+            }
+            //Toggle Random Colour
+            if (Keys_NewlyPressed.Contains(Keys.C) && !Keys_BeingPressed.Contains(Keys.C))
+            {
+                randomColors = !randomColors;
             }
 
 
@@ -202,7 +222,7 @@ namespace FractalRenderer
 
         #region Fundamentals
 
-        void DrawLine(Vector2 point, float Length, float Angle, Color Color, float Thickness = 1.5F)
+        void DrawLine(Vector2 point, float Length, float Angle, Color Color, float Thickness = 1F)
         {
             var origin = new Vector2(0f, 0.5f);
             var scale = new Vector2(Length, Thickness);
@@ -214,7 +234,6 @@ namespace FractalRenderer
         {
             KeyboardHandler();
 
-            Debug.WriteLine(InitialDistance);
 
 
             base.Update(gameTime);
@@ -250,8 +269,14 @@ namespace FractalRenderer
                     ToCheck.Add((ToCheck[0].Item1 + 1, new Vector4(EndX, EndY, ToCheck[0].Item2.Z * DistanceChange, NewAngle)));
                 }
 
+                //Color Selection
+                Color Color = Color.White;
+                if (randomColors)
+                {
+                    Color = Colors[random.Next(0, Colors.Count)];
+                }
 
-                DrawLine(new Vector2(ToCheck[0].Item2.X, ToCheck[0].Item2.Y), ToCheck[0].Item2.Z, ToCheck[0].Item2.W, Color.White);
+                DrawLine(new Vector2(ToCheck[0].Item2.X, ToCheck[0].Item2.Y), ToCheck[0].Item2.Z, ToCheck[0].Item2.W, Color);
 
                 ToCheck.RemoveAt(0);
             }
