@@ -218,6 +218,34 @@ namespace FractalRenderer
             Keys_BeingPressed = Keys_NewlyPressed;
         }
 
+        void Main(SpriteBatch _spriteBatch, Vector4 Point, int BranchStep)
+        {
+            if (BranchStep < BranchSteps)
+            {
+                //Left
+                float EndX = Point.X + (Point.Z * (float)Math.Cos(Point.W));
+                float EndY = Point.Y + (Point.Z * (float)Math.Sin(Point.W));
+                float NewAngle = Point.W + RotationChange;
+                Main(_spriteBatch, new Vector4(EndX, EndY, Point.Z * DistanceChange, NewAngle), BranchStep + 1);
+
+                //Right
+                EndX = Point.X + (Point.Z * (float)Math.Cos(Point.W));
+                EndY = Point.Y + (Point.Z * (float)Math.Sin(Point.W));
+                NewAngle = Point.W - RotationChange;
+
+                Main(_spriteBatch, new Vector4(EndX, EndY, Point.Z * DistanceChange, NewAngle), BranchStep + 1);
+            }
+
+            //Color Selection
+            Color Color = Color.White;
+            if (randomColors)
+            {
+                Color = Colors[random.Next(0, Colors.Count)];
+            }
+
+            DrawLine(new Vector2(Point.X, Point.Y), Point.Z, Point.W, Color);
+        }
+
         /////////////////////////////////////////
 
         #region Fundamentals
@@ -229,6 +257,7 @@ namespace FractalRenderer
 
             _spriteBatch.Draw(Color_White, point, null, Color, Angle, origin, scale, SpriteEffects.None, 0);
         }
+
 
         protected override void Update(GameTime gameTime)
         {
@@ -245,42 +274,12 @@ namespace FractalRenderer
 
             _spriteBatch.Begin();
 
+
+
             Vector4 Start = new Vector4(InitialPosition.X, InitialPosition.Y, InitialDistance, 4.7123889804F);
-            (int, Vector4) StartBranch = (0, Start);
-
-
-            List<(int, Vector4)> ToCheck = new List<(int, Vector4)>() { StartBranch };
-
-            while (ToCheck.Count > 0)
-            {
-                if (ToCheck[0].Item1 < BranchSteps)
-                {
-                    //Left
-                    float EndX = ToCheck[0].Item2.X + (ToCheck[0].Item2.Z * (float)Math.Cos(ToCheck[0].Item2.W));
-                    float EndY = ToCheck[0].Item2.Y + (ToCheck[0].Item2.Z * (float)Math.Sin(ToCheck[0].Item2.W));
-                    float NewAngle = ToCheck[0].Item2.W + RotationChange;
-                    ToCheck.Add((ToCheck[0].Item1 + 1, new Vector4(EndX, EndY, ToCheck[0].Item2.Z * DistanceChange, NewAngle)));
-
-                    //Right
-                    EndX = ToCheck[0].Item2.X + (ToCheck[0].Item2.Z * (float)Math.Cos(ToCheck[0].Item2.W));
-                    EndY = ToCheck[0].Item2.Y + (ToCheck[0].Item2.Z * (float)Math.Sin(ToCheck[0].Item2.W));
-                    NewAngle = ToCheck[0].Item2.W - RotationChange;
-
-                    ToCheck.Add((ToCheck[0].Item1 + 1, new Vector4(EndX, EndY, ToCheck[0].Item2.Z * DistanceChange, NewAngle)));
-                }
-
-                //Color Selection
-                Color Color = Color.White;
-                if (randomColors)
-                {
-                    Color = Colors[random.Next(0, Colors.Count)];
-                }
-
-                DrawLine(new Vector2(ToCheck[0].Item2.X, ToCheck[0].Item2.Y), ToCheck[0].Item2.Z, ToCheck[0].Item2.W, Color);
-
-                ToCheck.RemoveAt(0);
-            }
+            Main(_spriteBatch, Start, 0);
             
+
 
             _spriteBatch.End();
 
